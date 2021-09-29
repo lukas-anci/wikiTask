@@ -30,17 +30,9 @@ function App() {
         return result.title.match(regex);
       });
     }
-    console.log('will this work in matching', matches);
+    console.log('matches?', matches);
 
     setSuggestions(matches);
-
-    // const response = await fetch(newUrl);
-
-    // if (!response.ok) {
-    //   throw Error(response.statusText);
-    // }
-    // const json = await response.json();
-    // setResults(json.query);
   };
 
   const onSuggest = (search) => {
