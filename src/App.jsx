@@ -17,11 +17,11 @@ function App() {
 
     const { data } = await axios.get(url);
 
-    console.log(data);
+    // console.log(data);
     setResults(data.query.search);
     setSearchInfo(data.query.searchinfo);
-    const titleName = data.query.search.filter((x) => x.title);
-    console.log('resultai', titleName);
+    // const titleName = data.query.search.filter((x) => x.title);
+    // // console.log('resultai', titleName);
 
     let matches = [];
     if (search.length > 0) {
@@ -30,7 +30,7 @@ function App() {
         return result.title.match(regex);
       });
     }
-    console.log('matches?', matches);
+    // console.log('matches?', matches);
 
     setSuggestions(matches);
   };
@@ -40,6 +40,15 @@ function App() {
     setSuggestions([]);
   };
 
+  const deleteArticle = (id) => {
+    console.log('delete', id);
+
+    const filterArr = results.filter((result) => result.pageid !== id);
+
+    setResults(filterArr);
+  };
+
+  console.log('rezultas', results);
   return (
     <div className="App">
       <header>
@@ -84,6 +93,10 @@ function App() {
               <a href={newUrl} target="_blank" rel="noreferrer">
                 Read more
               </a>
+              <br />
+              <button onClick={() => deleteArticle(result.pageid)}>
+                Delete
+              </button>
             </div>
           );
         })}
