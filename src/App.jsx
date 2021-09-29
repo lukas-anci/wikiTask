@@ -93,8 +93,11 @@ function App() {
               <a href={newUrl} target="_blank" rel="noreferrer">
                 Read more
               </a>
-              <br />
-              <button onClick={() => deleteArticle(result.pageid)}>
+
+              <button
+                className="delete"
+                onClick={() => deleteArticle(result.pageid)}
+              >
                 Delete
               </button>
             </div>
