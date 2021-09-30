@@ -2,6 +2,7 @@ import { useEffect, useState } from 'react';
 import './App.css';
 
 import axios from 'axios';
+import Results from './components/Results';
 function App() {
   const [search, setSearch] = useState('');
   const [results, setResults] = useState([]);
@@ -17,11 +18,8 @@ function App() {
 
     const { data } = await axios.get(url);
 
-    // console.log(data);
     setResults(data.query.search);
     setSearchInfo(data.query.searchinfo);
-    // const titleName = data.query.search.filter((x) => x.title);
-    // // console.log('resultai', titleName);
 
     let matches = [];
     if (search.length > 0) {
@@ -30,7 +28,6 @@ function App() {
         return result.title.match(regex);
       });
     }
-    // console.log('matches?', matches);
 
     setSuggestions(matches);
   };
@@ -41,14 +38,11 @@ function App() {
   };
 
   const deleteArticle = (id) => {
-    console.log('delete', id);
-
     const filterArr = results.filter((result) => result.pageid !== id);
 
     setResults(filterArr);
   };
 
-  console.log('rezultas', results);
   return (
     <div className="App">
       <header>
@@ -82,28 +76,7 @@ function App() {
           ''
         )}
       </header>
-      <div className="results">
-        {results.map((result, i) => {
-          const newUrl = `https://en.wikipedia.org/?curid=${result.pageid}`;
-
-          return (
-            <div key={i} className="result">
-              <h3>{result.title}</h3>
-              <p dangerouslySetInnerHTML={{ __html: result.snippet }}></p>
-              <a href={newUrl} target="_blank" rel="noreferrer">
-                Read more
-              </a>
-
-              <button
-                className="delete"
-                onClick={() => deleteArticle(result.pageid)}
-              >
-                Delete
-              </button>
-            </div>
-          );
-        })}
-      </div>
+      <Results deleteArticle={deleteArticle} results={results} />
     </div>
   );
 }
