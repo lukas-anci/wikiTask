@@ -5,12 +5,14 @@ import axios from 'axios';
 import Results from './components/Results';
 
 import SearchForm from './components/SearchForm';
+// import OneResult from './components/OneResult';
 
 function App() {
   const [search, setSearch] = useState('');
   const [results, setResults] = useState([]);
   const [searchInfo, setSearchInfo] = useState({});
   const [suggestions, setSuggestions] = useState([]);
+  // const [findOne, setFindOne] = useState('');
 
   const handleSearch = async (e) => {
     e.preventDefault();
@@ -35,7 +37,13 @@ function App() {
     setSuggestions(matches);
   };
 
-  const onSuggest = (search) => {
+  const onSuggest = async (search) => {
+    // const url = `https://en.wikipedia.org/w/api.php?action=query&list=search&prop=info&inprop=url&utf8=&format=json&origin=*&srlimit=10&srsearch=${search}`;
+    // const { data } = await axios.get(url);
+    // console.log({ data: data.query.search[0] });
+    // setFindOne(data.query.search[0]);
+
+    // console.log('what is search', search);
     setSearch(search);
     setSuggestions([]);
   };
@@ -57,7 +65,7 @@ function App() {
         onSuggest={onSuggest}
         searchInfo={searchInfo}
       />
-
+      {/* {findOne ? <OneResult findOne={findOne} /> : ''} */}
       <Results deleteArticle={deleteArticle} results={results} />
     </div>
   );

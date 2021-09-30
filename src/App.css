@@ -74,6 +74,14 @@ h1 {
   font-size: 2rem;
   margin-bottom: 1rem;
 }
+.one-result {
+  margin-bottom: 3rem;
+}
+.one h3 {
+  color: rgb(54, 53, 53);
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
 
 .result p {
   color: #313131;
