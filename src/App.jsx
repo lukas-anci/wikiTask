@@ -1,8 +1,11 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import './App.css';
 
 import axios from 'axios';
 import Results from './components/Results';
+
+import SearchForm from './components/SearchForm';
+
 function App() {
   const [search, setSearch] = useState('');
   const [results, setResults] = useState([]);
@@ -45,37 +48,16 @@ function App() {
 
   return (
     <div className="App">
-      <header>
-        <h1>My wiki list</h1>
-        <form onSubmit={handleSearch} className="search-box">
-          <input
-            type="search"
-            placeholder="type in your search"
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            onBlur={() => {
-              setTimeout(() => {
-                setSuggestions([]);
-              }, 100);
-            }}
-          />
-          {suggestions &&
-            suggestions.map((suggestion, i) => (
-              <div
-                onClick={() => onSuggest(suggestion.title)}
-                className="suggestions"
-                key={i}
-              >
-                {suggestion.title}
-              </div>
-            ))}
-        </form>
-        {searchInfo.totalhits ? (
-          <p> Search Results: {searchInfo.totalhits}</p>
-        ) : (
-          ''
-        )}
-      </header>
+      <SearchForm
+        handleSearch={handleSearch}
+        search={search}
+        setSearch={setSearch}
+        setSuggestions={setSuggestions}
+        suggestions={suggestions}
+        onSuggest={onSuggest}
+        searchInfo={searchInfo}
+      />
+
       <Results deleteArticle={deleteArticle} results={results} />
     </div>
   );

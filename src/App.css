@@ -29,10 +29,6 @@ h1 {
 }
 
 .search-box {
-  /* display: flex; */
-  align-items: center;
-  justify-content: center;
-  border-radius: 1rem;
   overflow: hidden;
   width: 100%;
   max-width: 480px;
